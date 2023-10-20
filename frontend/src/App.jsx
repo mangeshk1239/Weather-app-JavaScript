@@ -29,7 +29,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <button onClick={async() => {
-        await fetch("http://localhost:3000/api/get/get?city_name=nagpur");
+        await fetch("http://localhost:3000/api/weather/get?city_name=nagpur");
       }}>Click Me</button>
     </>
   )
