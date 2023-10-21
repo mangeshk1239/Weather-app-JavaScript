@@ -1,38 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import * as M from '@mui/material';
+import * as React from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [cityName, setCityName] = React.useState("");
+  const [data, setData] = React.useState(null);
+  console.log("data", data);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <button onClick={async() => {
-        await fetch("http://localhost:3000/api/weather/get?city_name=nagpur");
-      }}>Click Me</button>
-    </>
+    <div>
+      <M.TextField onChange={(e) => setCityName(e.target.value)} id="outlined-basic" label="Outlined" variant="outlined" />
+      <M.Button variant="contained" onClick={handleGetWeather}>Submit</M.Button>
+    </div>
   )
+
+  async function handleGetWeather() {
+    try {
+      const response = await fetch(`/api/weather/get?city_name=${cityName}`).then(response => response.json());
+      if (response.success) setData(response.data);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  }
 }
 
-export default App
+export default App;
