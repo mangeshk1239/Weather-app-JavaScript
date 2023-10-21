@@ -1,10 +1,7 @@
 body {
     margin: 0 !important;
     padding: 0 !important;
-}
-
-.weatherApp {
-    min-height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
