@@ -9,7 +9,8 @@ export async function getCityWeather(req, res) {
             const data = {
                 cityName: response.data.name,
                 cityTemp: ~~(response.data.main.temp - 273.15),
-                cityWeather: response.data.weather[0].main.toLowerCase()
+                cityWeather: response.data.weather[0].main.toLowerCase(),
+                cityWeatherIcon: `${process.env.WEATHER_API_IMG_HOST}/img/wn/${response.data.weather[0].icon}@2x.png`
             };
 
             return res.status(200).send({ success: true, data });
